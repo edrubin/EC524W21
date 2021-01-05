@@ -1,5 +1,5 @@
 # Fdb version 3
-["lualatex"] 1609802784 "syllabus.tex" "syllabus.pdf" "syllabus" 1609802786
+["lualatex"] 1609802784 "syllabus.tex" "syllabus.pdf" "syllabus" 1609807280
   "/Users/edwardarubin/Library/Fonts/FiraCode-Bold.otf" 1568090466 226304 ee5692490cda5eb25c1657d58829da21 ""
   "/Users/edwardarubin/Library/Fonts/FiraCode-Regular.otf" 1568090466 225664 e82cc5131cc0c9e7be6bec127f5507f2 ""
   "/Users/edwardarubin/Library/Fonts/FiraSans-Book.otf" 1542666288 359960 078b01ebfebe8cd48263eba26f9f4371 ""
@@ -169,6 +169,6 @@
   "syllabus.tex" 1609802784 12851 ab9451c9f65fcda8304f183f42516b43 ""
   (generated)
   "syllabus.out"
-  "syllabus.log"
   "syllabus.aux"
+  "syllabus.log"
   "syllabus.pdf"

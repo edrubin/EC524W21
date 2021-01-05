@@ -40,15 +40,16 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 2. How is prediction (and how are its tools) different from causal inference?
 3. Motivating examples
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.Rmd) -->
 
-[**001 - Statistical learning foundations**](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html)
+**001 - Statistical learning foundations**
+<!-- [**001 - Statistical learning foundations**](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html) -->
 
 1. Why do we have a class on prediction?
 2. How is prediction (and how are its tools) different from causal inference?
 3. Motivating examples
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.Rmd) -->
 
 [**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html)
 
@@ -58,7 +59,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. The Bayes classifier
 1. KNN
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.Rmd) -->
 
 [**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html)
 
@@ -70,7 +71,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 [*In-class:* Validation-set exercise (Kaggle)](https://www.kaggle.com/edwardarubin/ec524-lecture-003/)
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.Rmd) -->
 
 [**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.html)
 
@@ -79,7 +80,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Model selection—best subset and stepwise
 1. Selection criteria
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.Rmd) -->
 
 [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html)
 
@@ -87,7 +88,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Lasso
 1. Elasticnet
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.Rmd) -->
 
 [**006 - Classification intro**](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html)
 
@@ -96,7 +97,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. But also: Logistic regression
 1. Assessment: Confusion matrix, assessment criteria, ROC, and AUC
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.Rmd) -->
 
 [**007 - Decision trees**](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html)
 
@@ -104,7 +105,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Regression trees
 1. Classification trees—including the Gini index, entropy, and error rate
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.Rmd) -->
 
 [**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html)
 
@@ -113,7 +114,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Random forests
 1. Boosting
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.Rmd) -->
 
 [**009 - Support vector machines**](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.html)
 
@@ -122,7 +123,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 3. The support vector classifier
 4. Support vector machines
 
-**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.Rmd)
+<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.Rmd) -->
 
 ## Projects
 
