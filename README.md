@@ -40,7 +40,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 2. How is prediction (and how are its tools) different from causal inference?
 3. Motivating examples
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/000/000-slides.Rmd)
 
 **001 - Statistical learning foundations**
 <!-- [**001 - Statistical learning foundations**](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html) -->
@@ -51,7 +51,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/001/001-slides.Rmd) -->
 
-[**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html)
+**002 - Model accuracy**
+<!-- [**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html) -->
 
 1. Model accuracy
 1. Loss for regression and classification
@@ -61,7 +62,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/002/002-slides.Rmd) -->
 
-[**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html)
+**003 - Resampling methods**
+<!-- [**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html) -->
 
 1. Review
 1. The validation-set approach
@@ -73,6 +75,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/003/003-slides.Rmd) -->
 
+**004 - Linear regression strikes back**
 [**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.html)
 
 1. Returning to linear regression
@@ -82,7 +85,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/004/004-slides.Rmd) -->
 
-[**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html)
+**005 - Shrinkage methods**
+<!-- [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html) -->
 
 1. Ridge regression
 1. Lasso
@@ -90,7 +94,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/005/005-slides.Rmd) -->
 
-[**006 - Classification intro**](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html)
+**006 - Classification intro**
+<!-- [**006 - Classification intro**](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html) -->
 
 1. Introduction to classification
 1. Why not regression?
@@ -99,7 +104,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/006/006-slides.Rmd) -->
 
-[**007 - Decision trees**](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html)
+**007 - Decision trees**
+<!-- [**007 - Decision trees**](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html) -->
 
 1. Introduction to trees
 1. Regression trees
@@ -107,7 +113,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/007/007-slides.Rmd) -->
 
-[**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html)
+**008 - Ensemble methods**
+<!-- [**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html) -->
 
 1. Introduction
 1. Bagging
@@ -116,7 +123,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 <!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W20/master/lecture/008/008-slides.Rmd) -->
 
-[**009 - Support vector machines**](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.html)
+**009 - Support vector machines**
+<!-- [**009 - Support vector machines**](https://raw.githack.com/edrubin/EC524W20/master/lecture/009/009-slides.html) -->
 
 1. Hyperplanes and classification
 2. The maximal margin hyperplane/classifier
