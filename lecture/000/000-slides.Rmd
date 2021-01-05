@@ -69,6 +69,7 @@ name: admin
 
 .hi-slate[.mono[TODO] list]
 
+- .b[Today:] Sign up for [Kaggle](https://www.kaggle.com)
 - .b[Assignment] in-class Thursday (finish outside of class)
 - Upcoming readings:
   - ISL Ch1–Ch2

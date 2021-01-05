@@ -42,14 +42,13 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/000/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/000/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/000/000-slides.Rmd)
 
-**001 - Statistical learning foundations**
-<!-- [**001 - Statistical learning foundations**](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.html) -->
+[**001 - Statistical learning foundations**](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.html)
 
 1. Why do we have a class on prediction?
 2. How is prediction (and how are its tools) different from causal inference?
 3. Motivating examples
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.Rmd)
 
 **002 - Model accuracy**
 <!-- [**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html) -->
