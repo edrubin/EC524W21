@@ -199,9 +199,9 @@ You will need to sign into you Kaggle account and then hit "Copy and Edit" to ad
 
 **Additional** [R script for simulation](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/cv-sim.R)
 
-**003**
+**003** TBD
 
-**004**
+**004** TBD
 
 **005** - Data cleaning and `dplyr`
 <!-- [**005** - Data cleaning and `dplyr`](https://raw.githack.com/CMLennon/EC524W20/master/lab/003-DPLYR-part-2-electric-boogaloo/001-slides.html#1) -->
