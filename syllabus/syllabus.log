@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.4.16)  4 JAN 2021 15:26
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.4.16)  6 JAN 2021 16:52
  restricted system commands enabled.
 **syllabus.tex
 (./syllabus.tex
@@ -35,7 +35,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.094 seconds
+luaotfload | main : initialization completed in 0.093 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -1265,7 +1265,7 @@ Here is how much of LuaTeX's memory you used:
  572 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 5 glue, 1 kern, 12 attribute, 63 glue_spec, 12 attr
 ibute_list, 1 write, 2 pdf_action nodes
-   avail lists: 2:537,3:126,4:72,5:526,6:33,7:2936,8:43,9:129,10:5,11:195
+   avail lists: 2:537,3:126,4:72,5:524,6:33,7:2930,8:43,9:129,10:5,11:195
  26217 multiletter control sequences out of 65536+600000
  92 fonts using 17486839 bytes
  39i,11n,67p,466b,733s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1280,7 +1280,7 @@ tf></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/lo
 cal/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/
 2018/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-d
 ist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on syllabus.pdf (5 pages, 69348 bytes).
+Output written on syllabus.pdf (5 pages, 69440 bytes).
 
 PDF statistics: 192 PDF objects out of 1000 (max. 8388607)
  161 compressed objects within 2 object streams
