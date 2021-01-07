@@ -6,7 +6,7 @@ Welcome to day two of our prediction course. Today we're going to try to predict
 
 - We want to you **start thinking about prediction** scenarios and how they may differ from other settings in econometrics—goals, challenges, data, decisions, *etc*.
 - We also thought you could use a **refresher/review of `R`**.
-- We would like to introduce you to [Kaggle](https://kaggle.com).
+- We would like to introduce you to **[Kaggle](https://kaggle.com)**.
 
 ## Help!
 

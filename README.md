@@ -135,7 +135,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 ## Projects
 
-<!-- **Intro** [Predicting sales price in housing data (Kaggle)](https://github.com/edrubin/EC524W21/tree/master/projects/kaggle-house-prices) -->
+**000** [Predicting sales price in housing data (Kaggle)](https://github.com/edrubin/EC524W21/tree/master/projects/project-000)
 
 **Help:** [Kaggle notebooks](https://rpubs.com/Clennon/KagNotes)
 
