@@ -137,7 +137,10 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **000** [Predicting sales price in housing data (Kaggle)](https://github.com/edrubin/EC524W21/tree/master/projects/project-000)
 
-**Help:** [Kaggle notebooks](https://rpubs.com/Clennon/KagNotes) (from Connor Lennon)
+**Help:** 
+
+- [A simple example/walkthrough](https://www.kaggle.com/edwardarubin/project-000-example)
+- [Kaggle notebooks](https://rpubs.com/Clennon/KagNotes) (from Connor Lennon)
 
 **001**
 <!-- **001** [KNN and loss (Kaggle notebook)](https://www.kaggle.com/edwardarubin/ec524-knn-loss)
@@ -170,14 +173,14 @@ You will need to sign into you Kaggle account and then hit "Copy and Edit" to ad
 
 ## Lab notes
 
-**000 - Workflow and cleaning**
-<!-- [**000 - Workflow and cleaning**](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html) -->
+[**000 - Workflow and cleaning**](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html)
 
 1. General "best practices" for coding
 2. Working with RStudio
 3. The pipe (`%>%`)
+4. [Cleaning and Kaggle follow up](https://www.kaggle.com/edwardarubin/project-000-followup)
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.Rmd)
 
 **001 - dplyr and Kaggle notebooks**
 
