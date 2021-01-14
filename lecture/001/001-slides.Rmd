@@ -422,7 +422,7 @@ $$
 \begin{aligned}
   \mathop{E}\left[ \left\{ \color{#FFA500}{\mathbf{y}} - \hat{\color{#FFA500}{\mathbf{y}}} \right\}^2 \right]
   &=
-  \mathop{E}\left[ \left\{ \color{#20B2AA}{f}(\color{#6A5ACD}{\mathbf{X}}) + \color{#e64173}{\varepsilon} + \hat{\color{#20B2AA}{f}}(\color{#6A5ACD}{\mathbf{X}}) \right\}^2 \right] \\
+  \mathop{E}\left[ \left\{ \color{#20B2AA}{f}(\color{#6A5ACD}{\mathbf{X}}) + \color{#e64173}{\varepsilon} - \hat{\color{#20B2AA}{f}}(\color{#6A5ACD}{\mathbf{X}}) \right\}^2 \right] \\
   &= \underbrace{\left[ \color{#20B2AA}{f}(\color{#6A5ACD}{\mathbf{X}}) - \hat{\color{#20B2AA}{f}}(\color{#6A5ACD}{\mathbf{X}}) \right]^2}_{\text{Reducible}} + \underbrace{\mathop{\text{Var}} \left( \color{#e64173}{\varepsilon} \right)}_{\text{Irreducible}}
 \end{aligned}
 $$
