@@ -50,8 +50,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/001/001-slides.Rmd)
 
-**002 - Model accuracy**
-<!-- [**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html) -->
+[**002 - Model accuracy**](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html)
 
 1. Model accuracy
 1. Loss for regression and classification
@@ -59,7 +58,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. The Bayes classifier
 1. KNN
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.Rmd)
 
 **003 - Resampling methods**
 <!-- [**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) -->
