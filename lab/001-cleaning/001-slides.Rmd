@@ -116,8 +116,10 @@ starwars %>% select(name, mass, weight)
 --
 
 ```{r, echo = F}
+# Convert kg to lbs: 1 kg is ~2.205 pounds
+starwars %<>% mutate(weight = mass * 2.205) 
 # Check results
-starwars %>% select(name, mass, weight) %>% datatable(rownames = F, options = list(dom = 't'))
+starwars %>% select(name, mass, weight) %>% datatable(rownames = F, options = list(dom = 't', pageLength = 3))
 ```
 
 `mutate()` receives data and returns both old and new columns. 
@@ -297,7 +299,7 @@ starwars %<>% mutate_at(
   .funs = na_to_other
 )
 # Check if it worked!
-starwars %>% select(name, contains("_color")) %>% datatable(rownames = F, options = list(dom = 't'))
+starwars %>% select(name, contains("_color")) %>% datatable(rownames = F, options = list(dom = 't', pageLength = 3))
 ```
 
 ---
@@ -324,7 +326,7 @@ tmp = dplyr::starwars %>% mutate_at(
   replace = "other"
 )
 # Check if it worked!
-tmp %>% select(name, contains("_color")) %>% datatable(rownames = F, options = list(dom = 't'))
+tmp %>% select(name, contains("_color")) %>% datatable(rownames = F, options = list(dom = 't', pageLength = 3))
 ```
 
 ---
@@ -333,7 +335,7 @@ name: mutate-if-intro
 # .mono[mutate] and family
 ## .mono[\_if]
 
-`mutate`.neg-left.b.pink[`_if`] is very similar to `mutate`.neg-left.b.orange[`_if`]. 
+`mutate`.neg-left.b.pink[`_if`] is very similar to `mutate`.neg-left.b.orange[`_at`]. 
 
 - .b.pink[`_if`] uses .pink[logical statements] to select columns.
 
@@ -376,7 +378,7 @@ Let's .purple[change `NA`s to variables' means] for .orange[`numeric` variables]
 .b.slate[Step 1] Create a function that replaces `NA`s with the mean:
 ```{r, eval = F}
 # Function for mean imputation/replacement
-mean_replace = function(d) replace_na(d, replace = mean(d, `na.rm = T))
+mean_replace = function(d) replace_na(d, replace = mean(d, `na.rm = T`))
 ```
 .note[Notice:] We need `na.rm = T` in `mean()` to calculate the mean when `NA`s exist.
 
