@@ -181,11 +181,12 @@ You will need to sign into you Kaggle account and then hit "Copy and Edit" to ad
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.Rmd)
 
-**001 - dplyr and Kaggle notebooks**
+[**001 - Data cleaning: Multiple mutations**](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.html)
 
 1. Finish [previous lab on `dplyr`](https://raw.githack.com/edrubin/EC524W21/master/lab/000-cleaning/000-slides.html#48)
-2. [Working in (Kaggle) notebooks](https://www.kaggle.com/voodoojanus/ec524-jan-17-20)
-3. [Kaggle contest notes](https://rpubs.com/Clennon/KagNotes)
+2. [Extending `dplyr` and `mutate`](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.html)
+
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.Rmd)
 
 **002 - Cross validation and simulation**
 <!-- [**002 - Cross validation and simulation**](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/002-slides.html) -->
