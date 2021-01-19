@@ -60,8 +60,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/002/002-slides.Rmd)
 
-**003 - Resampling methods**
-<!-- [**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) -->
+[**003 - Resampling methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html)
 
 1. Review
 1. The validation-set approach
@@ -69,10 +68,10 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. k-fold cross validation
 1. The bootstrap
 
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.Rmd)
+
 *In-class:* Validation-set exercise (Kaggle)
 <!-- [*In-class:* Validation-set exercise (Kaggle)](https://www.kaggle.com/edwardarubin/ec524-lecture-003/) -->
-
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.Rmd) -->
 
 **004 - Linear regression strikes back**
 <!-- [**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) -->
