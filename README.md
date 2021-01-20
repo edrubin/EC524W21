@@ -70,9 +70,6 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.Rmd)
 
-*In-class:* Validation-set exercise (Kaggle)
-<!-- [*In-class:* Validation-set exercise (Kaggle)](https://www.kaggle.com/edwardarubin/ec524-lecture-003/) -->
-
 **004 - Linear regression strikes back**
 <!-- [**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) -->
 
@@ -139,6 +136,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 - [A simple example/walkthrough](https://www.kaggle.com/edwardarubin/project-000-example)
 - [Kaggle notebooks](https://rpubs.com/Clennon/KagNotes) (from Connor Lennon)
+
+**001** [Validation and out-of-sample performance](https://github.com/edrubin/EC524W21/tree/master/projects/project-001)
 
 **001**
 <!-- **001** [KNN and loss (Kaggle notebook)](https://www.kaggle.com/edwardarubin/ec524-knn-loss)
