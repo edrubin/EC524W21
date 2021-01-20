@@ -39,5 +39,5 @@ We're returning to the [House Prices Kaggle competition](https://www.kaggle.com/
 1. How different were the your models in terms of performance? What about in terms of flexibility?
 1. Do you have any evidence in your tested models of overfitting? How do you know?
 1. Did you do anything to trade off between variance and bias in your models?
-1. Why do we typically prefer cross validation (*k-*fold or LOOCV) to the validation-set approach?
+1. Why do we typically prefer cross validation (*k*-fold or LOOCV) to the validation-set approach?
 1. Is it possible to create a flexible model using linear regression? Explain. 
