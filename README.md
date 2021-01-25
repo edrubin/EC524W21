@@ -186,16 +186,10 @@ You will need to sign into you Kaggle account and then hit "Copy and Edit" to ad
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/001-cleaning/001-slides.Rmd)
 
-**002 - Cross validation and simulation**
-<!-- [**002 - Cross validation and simulation**](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/002-slides.html) -->
+[**002 - Validation**](https://www.kaggle.com/stephenreed/ec524-lecture-003?scriptVersionId=52430728)
 
-1. Cross-validation review
-1. CV and interdependence
-1. Writing functions
-1. Introduction to learning via simulation
-1. Simulation: CV and dependence
-
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/002-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/002-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/002-slides.Rmd) -->
+1. Creating a training and validation data set from your observations dataframe in R
+2. Writing a function to iterate over multiple models to test and compare MSEs
 
 **Additional** [R script for simulation](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/cv-sim.R)
 
