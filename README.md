@@ -70,15 +70,16 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/003/003-slides.Rmd)
 
-**004 - Linear regression strikes back**
-<!-- [**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) -->
+[**004 - Linear regression strikes back**](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html)
 
 1. Returning to linear regression
 1. Model performance and overfit
 1. Model selection—best subset and stepwise
 1. Selection criteria
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.Rmd)
+
+**Bonus:** [An introduction to preprocessing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing). (Kaggle notebook)
 
 **005 - Shrinkage methods**
 <!-- [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html) -->
@@ -139,34 +140,15 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **001** [Validation and out-of-sample performance](https://github.com/edrubin/EC524W21/tree/master/projects/project-001)
 
-**001**
-<!-- **001** [KNN and loss (Kaggle notebook)](https://www.kaggle.com/edwardarubin/ec524-knn-loss)
-<br>
-You will need to sign into you Kaggle account and then hit "Copy and Edit" to add the notebook to your account.
-<br>
-*Due* 21 January 2020 before midnight. -->
-
 **002**
-<!-- **002** [Cross validation and linear regression (Kaggle notebook)](https://www.kaggle.com/edwardarubin/ec524-cross-validation)
-<br>
-*Due* 04 February 2020 before midnight. -->
 
 **003**
-<!-- **003** [Model selection and shrinkage (Kaggle notebook)](https://www.kaggle.com/edwardarubin/ec524-shrinkage/)
-<br>
-*Due* 13 February 2020 before midnight. -->
 
 **004**
-<!-- **004** [Predicting heart disease (Kaggle competition)](https://github.com/edrubin/EC524W21/tree/master/projects/kaggle-heart-disease) | [Competition](https://www.kaggle.com/c/ec524-heart-disease/)
-*Due* 20 February 2020 before midnight. -->
 
 **005**
-<!-- **005** [Classifying customer churn (Kaggle competition)](https://github.com/edrubin/EC524W21/tree/master/projects/kaggle-churn) | [Competition](https://www.kaggle.com/t/6b275809d36248e49d11bea483394c42)
-*Due* In-class 27 February 2020. -->
 
 **Class project**
-<!-- [**Class project**](https://github.com/edrubin/EC524W21/tree/master/projects/class-project)
-*Due* 12 March 2020 before class. -->
 
 ## Lab notes
 
@@ -190,22 +172,6 @@ You will need to sign into you Kaggle account and then hit "Copy and Edit" to ad
 
 1. Creating a training and validation data set from your observations dataframe in R
 2. Writing a function to iterate over multiple models to test and compare MSEs
-
-**Additional** [R script for simulation](https://raw.githack.com/edrubin/EC524W21/master/lab/002-resampling/cv-sim.R)
-
-**003** TBD
-
-**004** TBD
-
-**005** - Data cleaning and `dplyr`
-<!-- [**005** - Data cleaning and `dplyr`](https://raw.githack.com/CMLennon/EC524W20/master/lab/003-DPLYR-part-2-electric-boogaloo/001-slides.html#1) -->
-
-**Additional** [Data cleaning in R](https://www.kaggle.com/edwardarubin/ec524-clean-data/) (with `caret`)
-
-- Converting numeric variables to categorical
-- Converting categorical variables to dummies
-- Imputing missing values
-- Standardizing variables (centering and scaling)
 
 ## Additional resources
 
