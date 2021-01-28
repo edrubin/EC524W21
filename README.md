@@ -79,7 +79,11 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/004/004-slides.Rmd)
 
-**Bonus:** [An introduction to preprocessing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing). (Kaggle notebook)
+**In between: `tidymodels`-ing**
+
+- [An introduction to preprocessing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing). (Kaggle notebook)
+- [An introduction to modeling with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-modeling). (Kaggle notebook)
+- An introduction to resampling and model tuning with `tidymodels` (coming soon)
 
 [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html)
 
