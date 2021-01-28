@@ -81,14 +81,13 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Bonus:** [An introduction to preprocessing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing). (Kaggle notebook)
 
-**005 - Shrinkage methods**
-<!-- [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html) -->
+[**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html)
 
 1. Ridge regression
 1. Lasso
 1. Elasticnet
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.Rmd)
 
 **006 - Classification intro**
 <!-- [**006 - Classification intro**](https://raw.githack.com/edrubin/EC524W21/master/lecture/006/006-slides.html) -->
