@@ -155,8 +155,14 @@
   display: none;
 }
 
+/* Highlighted lines */
 .remark-code-line-highlighted {
   background-color: rgba(249, 39, 114, 0.5);
+}
+/* Highlighted spans */
+.remark-code-span-highlighted {
+  /* background-color: rgba(249, 39, 114, 0.5); */
+  background-color: rgba(255, 165, 0, 0.5);
 }
 
 .bigger {

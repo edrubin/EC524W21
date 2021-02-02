@@ -83,7 +83,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 - [An introduction to preprocessing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing). (Kaggle notebook)
 - [An introduction to modeling with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-modeling). (Kaggle notebook)
-- An introduction to resampling and model tuning with `tidymodels` (coming soon)
+- [An introduction to resampling, model tuning, and workflows with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-resampling) (Kaggle notebook)
 
 [**005 - Shrinkage methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/005/005-slides.html)
 
@@ -187,7 +187,6 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 ### Data Science
 
-- Workflow diagram: [.pdf](https://raw.githack.com/edrubin/EC524W21/master/resources/data-workflow.pdf) | [.png](https://raw.githack.com/edrubin/EC524W21/master/resources/data-workflow.pdf) | [.ai](https://raw.githack.com/edrubin/EC524W21/master/resources/data-workflow.ai)
 - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas
 - [Elements of AI](https://course.elementsofai.com/)
 - [Caltech professor Yaser Abu-Mostafa: Lectures about machine learning on YouTube](https://www.youtube.com/user/caltech/search?query=Yaser+Abu-Mostafa)

@@ -3,7 +3,7 @@ title: "Lecture .mono[005]"
 subtitle: "Shrinkage methods"
 author: "Edward Rubin"
 #date: "`r format(Sys.time(), '%d %B %Y')`"
-date: "28 February 2021"
+date: "02 February 2021"
 output:
   xaringan::moon_reader:
     css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
@@ -11,20 +11,20 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
+      highlightSpans: true
       countIncrementalSlides: false
 ---
 exclude: true
 
-```{R, setup, include = F}
+```{r, setup, include = F}
 library(pacman)
 p_load(
   broom, tidyverse,
   ggplot2, ggthemes, ggforce, ggridges, cowplot, scales,
   latex2exp, viridis, extrafont, gridExtra, plotly, ggformula,
   kableExtra, DT,
-  data.table, dplyr, snakecase, janitor,
-  lubridate, knitr, future, furrr,
-  MASS, estimatr, caret, glmnet,
+  snakecase, janitor, knitr, future, furrr,
+  MASS, estimatr, tidymodels, glmnet,
   huxtable, here, magrittr, parallel
 )
 # Define colors
@@ -282,40 +282,46 @@ The scale/units of predictors do not affect least squares' estimates.
 .note[Solution] Standardize your variables, _i.e._, `x_stnd = (x - mean(x))/sd(x)`.
 
 ---
+## Penalization and standardization
+
+.attn[Important] Predictors' .hi[units] can drastically .hi[affect ridge regression results].
+
+.b[Why?] Because $\mathbf{x}_j$'s units affect $\beta_j$, and ridge is very sensitive to $\beta_j$.
+
+.ex[Example] Let $x_1$ denote distance.
+
+.b[Least-squares regression]
+<br>
+If $x_1$ is .it[meters] and $\beta_1 = 3$, then when $x_1$ is .it[km], $\beta_1 = 3,000$.
+<br>
+The scale/units of predictors do not affect least squares' estimates.
+
+.hi[Ridge regression] pays a much larger penalty for $\beta_1=3,000$ than $\beta_1=3$.
+<br>You will not get the same (scaled) estimates when you change units.
+
+.note[Solution] Standardize your variables, _i.e._, `recipes::step_normalize()`.
+
+---
 name: ridge-example
 ## Example
 
-Let's return to the credit dataset.
+Let's return to the credit dataset—and [pre-processing with `tidymodels`](https://www.kaggle.com/edwardarubin/intro-tidymodels-preprocessing).
 
 .ex[Recall] We have 11 predictors and a numeric outcome `balance`.
 
-I standardized our .b[predictors] using `preProcess()` from `caret`, _i.e._,
+We can standardize our .b[predictors] using `step_normalize()` from `recipes`:
 
-```{R, credit-data-work, include = F, cache = T}
-# The Credit dataset
-credit_dt = ISLR::Credit %>% clean_names() %T>% setDT()
-# Clean variables
-credit_dt[, `:=`(
-  i_female = 1 * (gender == "Female"),
-  i_student = 1 * (student == "Yes"),
-  i_married = 1 * (married == "Yes"),
-  i_asian_american = 1 * (ethnicity == "Asian"),
-  i_african_american = 1 * (ethnicity == "African American")
-)]
-# Drop unwanted variables
-credit_dt[, `:=`(id = NULL, gender = NULL, student = NULL, married = NULL, ethnicity = NULL)]
-```
-
-```{R, credit-data-preprocess, cache = T}
-# Standardize all variables except 'balan ce'
-credit_stnd = preProcess(
-  # Do not process the outcome 'balance'
-  x = credit_dt %>% dplyr::select(-balance),
-  # Standardizing means 'center' and 'scale'
-  method = c("center", "scale")
-)
-# We have to pass the 'preProcess' object to 'predict' to get new data
-credit_stnd %<>% predict(newdata = credit_dt)
+```{r, credit-data-work}
+# Load the credit dataset
+credit_df = ISLR::Credit %>% clean_names()
+# Processing recipe: Define ID, standardize, create dummies, rename (lowercase)
+credit_recipe = credit_df %>% recipe(balance ~ .) %>% 
+  update_role(id, new_role = "id variable") %>% 
+  step_normalize(all_predictors() & all_numeric()) %>% 
+  step_dummy(all_predictors() & all_nominal()) %>% 
+  step_rename_at(everything(), fn = str_to_lower)
+# Time to juice
+credit_clean = credit_recipe %>% prep() %>% juice()
 ```
 
 ---
@@ -347,14 +353,14 @@ The .hi-slate[key arguments] for `glmnet()` are
 
 We just need to define a decreasing sequence for $\lambda$, and then we're set.
 
-```{R, ex-ridge-glmnet}
+```{r, ex-ridge-glmnet}
 # Define our range of lambdas (glmnet wants decreasing range)
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Fit ridge regression
 est_ridge = glmnet(
-  x = credit_stnd %>% dplyr::select(-balance) %>% as.matrix(),
-  y = credit_stnd$balance,
-  standardize = T,
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
+  standardize = F,
   alpha = 0,
   lambda = lambdas
 )
@@ -366,7 +372,7 @@ layout: false
 class: clear, middle
 
 .b[Ridge regression coefficents] for $\lambda$ between 0.01 and 100,000
-```{R, plot-ridge-glmnet, echo = F}
+```{r, plot-ridge-glmnet, echo = F}
 ridge_df = est_ridge %>% coef() %>% t() %>% as.matrix() %>% as.data.frame()
 ridge_df %<>% dplyr::select(-1) %>% mutate(lambda = est_ridge$lambda)
 ridge_df %<>% gather(key = "variable", value = "coefficient", -lambda)
@@ -394,15 +400,15 @@ layout: true
 ---
 `glmnet` also provides convenient cross-validation function: `cv.glmnet()`.
 
-```{R, cv-ridge, cache = T}
+```{r, cv-ridge, cache = F}
 # Define our lambdas
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Cross validation
 ridge_cv = cv.glmnet(
-  x = credit_stnd %>% dplyr::select(-balance) %>% as.matrix(),
-  y = credit_stnd$balance,
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
   alpha = 0,
-  standardize = T,
+  standardize = F,
   lambda = lambdas,
   # New: How we make decisions and number of folds
   type.measure = "mse",
@@ -416,7 +422,7 @@ class: clear, middle
 
 .b[Cross-validated RMSE and] $\lambda$: Which $\color{#e64173}{\lambda}$ minimizes CV RMSE?
 
-```{R, plot-cv-ridge, echo = F}
+```{r, plot-cv-ridge, echo = F}
 # Create data frame of our results
 ridge_cv_df = data.frame(
   lambda = ridge_cv$lambda,
@@ -446,19 +452,21 @@ theme_minimal(base_size = 20, base_family = "Fira Sans Book")
 ---
 class: clear, middle
 
-Often, you will have a minimum farther away from your extremes...
+Often, you will have a minimum more obviously far from the extremes.
+
+.ex[Recall:] Variance-bias tradeoff.
 
 ---
 layout: false
 class: clear, middle
 
-```{R, cv-ridge2, cache = T, include = F}
+```{r, cv-ridge2, cache = F, include = F}
 # Define our lambdas
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Cross validation
 ridge_cv2 = cv.glmnet(
-  x = credit_stnd %>% dplyr::select(-balance, -rating, -limit, -income) %>% as.matrix(),
-  y = credit_stnd$balance,
+  x = credit_clean %>% dplyr::select(-balance, -rating, -limit, -income) %>% as.matrix(),
+  y = credit_clean$balance,
   alpha = 0,
   standardize = T,
   lambda = lambdas,
@@ -470,7 +478,7 @@ ridge_cv2 = cv.glmnet(
 
 .b[Cross-validated RMSE and] $\lambda$: Which $\color{#e64173}{\lambda}$ minimizes CV RMSE?
 
-```{R, plot-cv-ridge2, echo = F}
+```{r, plot-cv-ridge2, echo = F}
 # Create data frame of our results
 ridge_cv_df2 = data.frame(
   lambda = ridge_cv2$lambda,
@@ -499,41 +507,73 @@ theme_minimal(base_size = 20, base_family = "Fira Sans Book")
 
 ---
 # Ridge regression
-## Example
+## In `tidymodels`
 
-We can also use `train()` from `caret` to cross validate ridge regression.
+`tidymodels` can also cross validate (and fit) ridge regression.
 
-```{R, credit-ridge-ex, eval = F}
+- Back to our the `linear_reg()` model 'specification'.
+
+- The penalty $\lambda$ (what we want to tune) is `penalty` instead of `lambda`.
+
+- Set `mixture = 0` inside `linear_reg()` (same as `alpha = 0`, above).
+
+- Use the `glmnet` engine.
+
+```{r, ridge-tidy-ex, eval = F}
+# Define the model
+model_ridge = linear_reg(penalty = tune(), mixture = 0) %>% set_engine("glmnet")
+```
+
+---
+class: clear
+
+.b.purple[Example of ridge regression with] .purple[`tidymodels`]
+
+```{r, credit-ridge-ex, eval = F}
 # Our range of lambdas
 lambdas = 10^seq(from = 5, to = -2, length = 1e3)
-# Ridge regression with cross validation
-ridge_cv = train(
-  # The formula
-  balance ~ .,
-  # The dataset
-  data = credit_stnd,
-  # The 'glmnet' package does ridge and lasso
-  method = "glmnet",
-  # 5-fold cross validation
-  trControl = trainControl("cv", number = 10),
-  # The parameters of 'glmnet' (alpha = 0 gives ridge regression)
-  tuneGrid = expand.grid(alpha = 0, lambda = lambdas)
-)
+# Define the 5-fold split
+set.seed(12345)
+credit_cv = credit_df %>% vfold_cv(v = 5)
+# Define the model
+model_ridge = linear_reg(penalty = tune(), mixture = 0) %>% set_engine("glmnet")
+# Define our ridge workflow
+workflow_ridge = workflow() %>%
+  add_model(model_ridge) %>% add_recipe(credit_recipe)
+# CV with our range of lambdas
+cv_ridge = 
+  workflow_ridge %>%
+  tune_grid(
+    credit_cv,
+    grid = data.frame(penalty = lambdas),
+    metrics = metric_set(rmse)
+  )
+# Show the best models
+cv_ridge %>% show_best()
 ```
+---
+class: clear, middle
+
+With `tidymodels`...
+
+.note[Next steps:] Finalize your workflow and fit your last model.
+
+.note[Recall:] `finalize_workflow()`, `last_fit()`, and `collect_predictions()`
+
 ---
 name: ridge-predict
 layout: false
 # Ridge regression
 ## Prediction in R
 
-Once you find your $\lambda$ via cross validation
+Otherwise: Once you find your $\lambda$ via cross validation,
 
 1\. Fit your model on the full dataset using the optimal $\lambda$
-```{R, ridge-final-1, eval = F}
+```{r, ridge-final-1, eval = F}
 # Fit final model
 final_ridge =  glmnet(
-  x = credit_stnd %>% dplyr::select(-balance) %>% as.matrix(),
-  y = credit_stnd$balance,
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
   standardize = T,
   alpha = 0,
   lambda = ridge_cv$lambda.min
@@ -549,14 +589,14 @@ Once you find your $\lambda$ via cross validation
 1\. Fit your model on the full dataset using the optimal $\lambda$
 
 2\. Make predictions
-```{R, ridge-final-2, eval = F}
+```{r, ridge-final-2, eval = F}
 predict(
   final_ridge,
   type = "response",
   # Our chosen lambda
   s = ridge_cv$lambda.min,
   # Our data
-  newx = credit_stnd %>% dplyr::select(-balance) %>% as.matrix()
+  newx = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix()
 )
 ```
 
@@ -659,14 +699,27 @@ We can also use `glmnet()` for lasso.
 
 Again, we define a decreasing sequence for $\lambda$, and we're set.
 
-```{R, ex-lasso-glmnet}
+```{r, ex-lasso-glmnet, eval = F}
 # Define our range of lambdas (glmnet wants decreasing range)
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Fit ridge regression
 est_lasso = glmnet(
-  x = credit_stnd %>% dplyr::select(-balance) %>% as.matrix(),
-  y = credit_stnd$balance,
-  standardize = T,
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
+  standardize = F,
+  `alpha = 1`,
+  lambda = lambdas
+)
+```
+
+```{r, ex-lasso-glmnet-duplicate, eval = T, include = F}
+# Define our range of lambdas (glmnet wants decreasing range)
+lambdas = 10^seq(from = 5, to = -2, length = 100)
+# Fit ridge regression
+est_lasso = glmnet(
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
+  standardize = F,
   alpha = 1,
   lambda = lambdas
 )
@@ -678,7 +731,7 @@ layout: false
 class: clear, middle
 
 .b[Lasso coefficents] for $\lambda$ between 0.01 and 100,000
-```{R, plot-lasso-glmnet, echo = F}
+```{r, plot-lasso-glmnet, echo = F}
 lasso_df = est_lasso %>% coef() %>% t() %>% as.matrix() %>% as.data.frame()
 lasso_df %<>% dplyr::select(-1) %>% mutate(lambda = est_lasso$lambda)
 lasso_df %<>% gather(key = "variable", value = "coefficient", -lambda)
@@ -707,7 +760,7 @@ Compare lasso's tendency to force coefficients to zero with our previous ridge-r
 class: clear, middle
 
 .b[Ridge regression coefficents] for $\lambda$ between 0.01 and 100,000
-```{R, plot-ridge-glmnet-2, echo = F}
+```{r, plot-ridge-glmnet-2, echo = F}
 ridge_df = est_ridge %>% coef() %>% t() %>% as.matrix() %>% as.data.frame()
 ridge_df %<>% dplyr::select(-1) %>% mutate(lambda = est_ridge$lambda)
 ridge_df %<>% gather(key = "variable", value = "coefficient", -lambda)
@@ -733,15 +786,15 @@ theme(legend.position = "bottom")
 
 We can also cross validate $\lambda$ with `cv.glmnet()`.
 
-```{R, cv-lasso, cache = T}
+```{r, cv-lasso, cache = T}
 # Define our lambdas
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Cross validation
 lasso_cv = cv.glmnet(
-  x = credit_stnd %>% dplyr::select(-balance) %>% as.matrix(),
-  y = credit_stnd$balance,
+  x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
+  y = credit_clean$balance,
   alpha = 1,
-  standardize = T,
+  standardize = F,
   lambda = lambdas,
   # New: How we make decisions and number of folds
   type.measure = "mse",
@@ -754,7 +807,7 @@ class: clear, middle
 
 .b[Cross-validated RMSE and] $\lambda$: Which $\color{#8AA19E}{\lambda}$ minimizes CV RMSE?
 
-```{R, plot-cv-lasso, echo = F}
+```{r, plot-cv-lasso, echo = F}
 # Create data frame of our results
 lasso_cv_df = data.frame(
   lambda = lasso_cv$lambda,
@@ -790,15 +843,15 @@ class: clear, middle
 
 .b[Cross-validated RMSE and] $\lambda$: Which $\color{#8AA19E}{\lambda}$ minimizes CV RMSE?
 
-```{R, cv-lasso2, cache = T, include = F}
+```{r, cv-lasso2, cache = T, include = F}
 # Define our lambdas
 lambdas = 10^seq(from = 5, to = -2, length = 100)
 # Cross validation
 lasso_cv2 = cv.glmnet(
-  x = credit_stnd %>% dplyr::select(-balance, -rating, -limit, -income) %>% as.matrix(),
-  y = credit_stnd$balance,
+  x = credit_clean %>% dplyr::select(-balance, -rating, -limit, -income, -id) %>% as.matrix(),
+  y = credit_clean$balance,
   alpha = 1,
-  standardize = T,
+  standardize = F,
   lambda = lambdas,
   # New: How we make decisions and number of folds
   type.measure = "mse",
@@ -806,7 +859,7 @@ lasso_cv2 = cv.glmnet(
 )
 ```
 
-```{R, plot-cv-lasso2, echo = F}
+```{r, plot-cv-lasso2, echo = F}
 # Create data frame of our results
 lasso_cv_df2 = data.frame(
   lambda = lasso_cv2$lambda,
@@ -890,7 +943,7 @@ $$
 \end{align}
 $$
 
-(We now have two tuning parameters: $\lambda$ and $\color{#181485}{\alpha}$.
+We now have two tuning parameters: $\lambda$ (penalty) and $\color{#181485}{\alpha}$ (mixture).
 
 --
 
@@ -903,7 +956,7 @@ Remember the `alpha` argument in `glmnet()`?
 # Ridge .it[and] lasso
 ## Why not both?
 
-We can use `train()` from `caret` to cross validate $\alpha$ and $\lambda$.
+We can use `tune()` from `tidymodels` to cross validate both $\alpha$ and $\lambda$.
 
 .note[Note] You need to consider all combinations of the two parameters.
 <br>This combination can create *a lot* of models to estimate.
@@ -923,26 +976,69 @@ leaves you with 1,000,000 models to estimate..super[.pink[†]]
 layout: false
 class: clear, middle
 
-```{R, credit-net-ex, eval = F}
-# Our range of λ
-lambdas = 10^seq(from = 5, to = -2, length = 1e3)
-# Our range of α
+.b[Cross validating elasticnet in] `tidymodels`
+
+```{r, credit-net-ex, eval = F}
+# Our range of λ and α
+lambdas = 10^seq(from = 5, to = -2, length = 1e2)
 alphas = seq(from = 0, to = 1, by = 0.1)
-# Ridge regression with cross validation
-net_cv = train(
-  # The formula
-  balance ~ .,
-  # The dataset
-  data = credit_stnd,
-  # The 'glmnet' package does ridge and lasso
-  method = "glmnet",
-  # 5-fold cross validation
-  trControl = trainControl("cv", number = 10),
-  # The parameters of 'glmnet'
-  tuneGrid = expand.grid(alpha = alphas, lambda = lambdas)
-)
+# Define the 5-fold split
+set.seed(12345)
+credit_cv = credit_df %>% vfold_cv(v = 5)
+# Define the elasticnet model
+model_net = linear_reg(
+  penalty = tune(), mixture = tune()
+) %>% set_engine("glmnet")
+# Define our workflow
+workflow_net = workflow() %>%
+  add_model(model_net) %>% add_recipe(credit_recipe)
+# CV elasticnet with our range of lambdas
+cv_net = 
+  workflow_net %>%
+  tune_grid(
+    credit_cv,
+    grid = expand_grid(mixture = alphas, penalty = lambdas),
+    metrics = metric_set(rmse)
+  )
 ```
 
+---
+layout: false
+class: clear, middle
+
+.b[Cross validating elasticnet in] `tidymodels` with .orange[`grid_regular()`]
+
+```{r, credit-net-ex-2, eval = F}
+# Our range of λ and α
+lambdas = 10^seq(from = 5, to = -2, length = 1e2)
+alphas = seq(from = 0, to = 1, by = 0.1)
+# Define the 5-fold split
+set.seed(12345)
+credit_cv = credit_df %>% vfold_cv(v = 5)
+# Define the elasticnet model
+model_net = linear_reg(
+  penalty = tune(), mixture = tune()
+) %>% set_engine("glmnet")
+# Define our workflow
+workflow_net = workflow() %>%
+  add_model(model_net) %>% add_recipe(credit_recipe)
+# CV elasticnet with our range of lambdas
+cv_net = 
+  workflow_net %>%
+  tune_grid(
+    credit_cv,
+    `grid = grid_regular(mixture(), penalty(), levels = 100:100)`,
+    metrics = metric_set(rmse)
+  )
+```
+
+---
+class: clear, middle
+
+.ex[In case you are curious:] The .it[best] model had $\lambda\approx$ 0.628 and $\alpha\approx$ 0.737.
+
+CV estimates elasticnet actually reduced RMSE from ridge's 118 to 101.
+ 
 ---
 name: sources
 layout: false
@@ -992,7 +1088,7 @@ These notes draw upon
 ---
 exclude: true
 
-```{R, create pdfs, eval = F, include = F}
+```{r, create pdfs, eval = F, include = F}
 pagedown::chrome_print(
   "005-slides.html",
   timeout = 60
