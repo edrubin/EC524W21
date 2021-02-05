@@ -144,7 +144,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **001** [Validation and out-of-sample performance](https://github.com/edrubin/EC524W21/tree/master/projects/project-001)
 
-**002**
+**002** [Cross validation, penalized regression, and `tidymodels`](https://github.com/edrubin/EC524W21/tree/master/projects/project-002)
 
 **003**
 
