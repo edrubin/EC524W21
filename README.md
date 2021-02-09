@@ -177,6 +177,18 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Creating a training and validation data set from your observations dataframe in R
 2. Writing a function to iterate over multiple models to test and compare MSEs
 
+[**003 - Practice using Tidymodels**]
+
+1. Cleaning data quickly and efficiently in tidymodels
+2. [R-script used in the lab](https://canvas.uoregon.edu/courses/174618/files/folder/Lab%204)
+
+[**004 - Ridge, Lasso and Elasticnet Regressions in tidymodels**](https://www.kaggle.com/stephenreed/lab-5-ridge-lasso-and-elasticnet-regressions?scriptVersionId=53618012)
+
+1. Ridge, Lasso and Elasticnet regressions in tidymodels from start to finish with a new dataset.
+2. Using the best model to then predict onto a test dataset.
+
+
+
 ## Additional resources
 
 ### R
