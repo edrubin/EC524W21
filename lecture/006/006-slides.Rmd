@@ -3,7 +3,7 @@ title: "Lecture .mono[006]"
 subtitle: "Classification"
 author: "Edward Rubin"
 #date: "`r format(Sys.time(), '%d %B %Y')`"
-date: "04 February 2021"
+date: "09 February 2021"
 output:
   xaringan::moon_reader:
     css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
@@ -549,6 +549,8 @@ Also: `logistic_reg()` in the `tidymodels` galaxy (with the `"glm"` engine).
 --
 
 "Generalized" essentially means that we're applying some transformation to $\beta_0 + \beta_1 X$ like logistic regression applies the logistic function.
+
+More generally: $$\color{#FFA500}{\mathbf{y}} = \color{#20B2AA}{g}^{-1} \left( \color{#6A5ACD}{\mathbf{X}} \color{#e64173}{\beta} \right) \iff \color{#20B2AA}{g}(\color{#FFA500}{\mathbf{y}}) = \color{#6A5ACD}{\mathbf{X}} \color{#e64173}{\beta} $$
 
 ---
 ## In R

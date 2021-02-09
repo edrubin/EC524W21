@@ -4,8 +4,7 @@
     <title>Lecture .mono[006]</title>
     <meta charset="utf-8" />
     <meta name="author" content="Edward Rubin" />
-    <meta name="date" content="2021-02-04" />
-    <script src="006-slides_files/header-attrs-2.6/header-attrs.js"></script>
+    <meta name="date" content="2021-02-09" />
     <link href="006-slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="006-slides_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="006-slides_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -27,7 +26,7 @@ class: center, middle, inverse, title-slide
 # Lecture .mono[006]
 ## Classification
 ### Edward Rubin
-### 04 February 2021
+### 09 February 2021
 
 ---
 
@@ -487,6 +486,8 @@ Also: `logistic_reg()` in the `tidymodels` galaxy (with the `"glm"` engine).
 --
 
 "Generalized" essentially means that we're applying some transformation to `\(\beta_0 + \beta_1 X\)` like logistic regression applies the logistic function.
+
+More generally: $$\color{#FFA500}{\mathbf{y}} = \color{#20B2AA}{g}^{-1} \left( \color{#6A5ACD}{\mathbf{X}} \color{#e64173}{\beta} \right) \iff \color{#20B2AA}{g}(\color{#FFA500}{\mathbf{y}}) = \color{#6A5ACD}{\mathbf{X}} \color{#e64173}{\beta} $$
 
 ---
 ## In R
