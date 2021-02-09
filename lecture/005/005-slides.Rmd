@@ -252,7 +252,7 @@ Choosing a .it[good] value for $\lambda$ is key.
 
 Now you see why we call it .it[shrinkage]: it encourages small coefficients.
 ---
-name: ridge-standardization
+name: standardization
 ## Penalization and standardization
 
 .attn[Important] Predictors' .hi[units] can drastically .hi[affect ridge regression results].
@@ -702,7 +702,7 @@ Again, we define a decreasing sequence for $\lambda$, and we're set.
 ```{r, ex-lasso-glmnet, eval = F}
 # Define our range of lambdas (glmnet wants decreasing range)
 lambdas = 10^seq(from = 5, to = -2, length = 100)
-# Fit ridge regression
+# Fit lasso regression
 est_lasso = glmnet(
   x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
   y = credit_clean$balance,
@@ -715,7 +715,7 @@ est_lasso = glmnet(
 ```{r, ex-lasso-glmnet-duplicate, eval = T, include = F}
 # Define our range of lambdas (glmnet wants decreasing range)
 lambdas = 10^seq(from = 5, to = -2, length = 100)
-# Fit ridge regression
+# Fit lasso regression
 est_lasso = glmnet(
   x = credit_clean %>% dplyr::select(-balance, -id) %>% as.matrix(),
   y = credit_clean$balance,

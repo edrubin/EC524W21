@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta name="author" content="Edward Rubin" />
     <meta name="date" content="2021-02-02" />
-    <script src="005-slides_files/header-attrs-2.6/header-attrs.js"></script>
     <link href="005-slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="005-slides_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="005-slides_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -223,7 +222,7 @@ Choosing a .it[good] value for `\(\lambda\)` is key.
 
 Now you see why we call it .it[shrinkage]: it encourages small coefficients.
 ---
-name: ridge-standardization
+name: standardization
 ## Penalization and standardization
 
 .attn[Important] Predictors' .hi[units] can drastically .hi[affect ridge regression results].
@@ -598,7 +597,7 @@ Again, we define a decreasing sequence for `\(\lambda\)`, and we're set.
 ```r
 # Define our range of lambdas (glmnet wants decreasing range)
 lambdas = 10^seq(from = 5, to = -2, length = 100)
-# Fit ridge regression
+# Fit lasso regression
 est_lasso = glmnet(
   x = credit_clean %&gt;% dplyr::select(-balance, -id) %&gt;% as.matrix(),
   y = credit_clean$balance,
@@ -873,8 +872,6 @@ These notes draw upon
 
 ---
 exclude: true
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
