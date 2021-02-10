@@ -462,7 +462,7 @@ $$
 
 --
 
-1. .b[changes in probability] due to $X$ depend on level of $X$.super[.pink[†]]
+1. .b[changes in probability] due to $X$ depend on level of $X$.super[.pink[††]]
 
 .footnote[
 .tran[† The "log odds" is sometimes called "logit".] .pink[††] It's nonlinear!

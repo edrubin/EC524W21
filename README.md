@@ -146,6 +146,8 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **002** [Cross validation, penalized regression, and `tidymodels`](https://github.com/edrubin/EC524W21/tree/master/projects/project-002)
 
+*Paper:* [Prediction Policy Problems](https://www.cs.cornell.edu/home/kleinber/aer15-prediction.pdf)
+
 **003**
 
 **004**
