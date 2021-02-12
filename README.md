@@ -105,14 +105,13 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/006/006-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/006/006-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/006/006-slides.Rmd)
 
-**007 - Decision trees**
-<!-- [**007 - Decision trees**](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.html) -->
+[**007 - Decision trees**](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.html)
 
 1. Introduction to trees
 1. Regression trees
 1. Classification trees—including the Gini index, entropy, and error rate
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.Rmd)
 
 **008 - Ensemble methods**
 <!-- [**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html) -->
