@@ -189,6 +189,12 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Ridge, Lasso and Elasticnet regressions in `tidymodels` from start to finish with a new dataset.
 2. Using the best model to then predict onto a test dataset.
 
+[**005 - Forcing Splits in `tidymodels` with pre-split data, and doing Ridge, Lasso and Elasticnet Logistic Regressions in `tidymodels`**](https://www.kaggle.com/stephenreed/lab-6-logistic-regressions)
+
+1.  [Combining pre-split data together and then defining a custom split](https://www.kaggle.com/edwardarubin/intro-tidymodels-split-kaggle)
+2.  Running a Ridge, Lasso or Elasticnet logistic regression in `tidymodels` using a fresh dataset.
+3.  Predicting the model onto test data and then viewing the confusion matrix.
+
 ## Additional resources
 
 ### R
