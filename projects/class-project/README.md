@@ -18,7 +18,9 @@
 
 ## Materials due
 
-By midnight on March 10th, submit on Canvas (share links or upload files):
+Your topic and group are due by the end of the day on **February 25th**.
+
+By midnight on **March 10th**, submit on Canvas (share links or upload files):
 
 1. Kaggle notebook with (commented) analysis code and figures
 1. 1-page "executive summary" (see below for format)
