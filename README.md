@@ -156,9 +156,11 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 ## Class project
 
-[Outline of the project](https://github.com/edrubin/EC524W21/projects/class-project)
+[Outline of the project](https://github.com/edrubin/EC524W21/tree/master/projects/class-project)
 
-*Note:* **Topic and group due by 25 February 2021**
+**Topic and group due by 25 February 2021.**
+
+**Final project submission due by midnight on March 10th.**
 
 ## Lab notes
 
