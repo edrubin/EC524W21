@@ -154,7 +154,11 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **005**
 
-**Class project**
+## Class project
+
+[Outline of the project](https://github.com/edrubin/EC524W21/projects/class-project)
+
+*Note:* **Topic and group due by 25 February 2021**
 
 ## Lab notes
 
@@ -179,7 +183,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Creating a training and validation data set from your observations dataframe in R
 2. Writing a function to iterate over multiple models to test and compare MSEs
 
-[**003 - Practice using `tidymodels`**]
+**003 - Practice using `tidymodels`**
 
 1. Cleaning data quickly and efficiently with `tidymodels`
 2. [R-script used in the lab](https://canvas.uoregon.edu/courses/174618/files/folder/Lab%204)
@@ -189,7 +193,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 1. Ridge, Lasso and Elasticnet regressions in `tidymodels` from start to finish with a new dataset.
 2. Using the best model to then predict onto a test dataset.
 
-[**005 - Forcing Splits in `tidymodels` with pre-split data, and doing Ridge, Lasso and Elasticnet Logistic Regressions in `tidymodels`**](https://www.kaggle.com/stephenreed/lab-6-logistic-regressions)
+[**005 - Forcing splits in `tidymodels` and penalized regression**](https://www.kaggle.com/stephenreed/lab-6-logistic-regressions)
 
 1.  [Combining pre-split data together and then defining a custom split](https://www.kaggle.com/edwardarubin/intro-tidymodels-split-kaggle)
 2.  Running a Ridge, Lasso or Elasticnet logistic regression in `tidymodels` using a fresh dataset.
