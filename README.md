@@ -113,15 +113,14 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/007/007-slides.Rmd)
 
-**008 - Ensemble methods**
-<!-- [**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html) -->
+[**008 - Ensemble methods**](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html)
 
 1. Introduction
 1. Bagging
 1. Random forests
 1. Boosting
 
-<!-- **Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.Rmd) -->
+**Formats** [.html](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html) | [.pdf](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.pdf) | [.Rmd](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.Rmd)
 
 **009 - Support vector machines**
 <!-- [**009 - Support vector machines**](https://raw.githack.com/edrubin/EC524W21/master/lecture/009/009-slides.html) -->

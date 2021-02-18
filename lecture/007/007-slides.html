@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta name="author" content="Edward Rubin" />
     <meta name="date" content="2021-02-11" />
-    <script src="007-slides_files/header-attrs-2.6/header-attrs.js"></script>
     <link href="007-slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="007-slides_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="007-slides_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -77,7 +76,7 @@ name: fundamentals
 
 --
 
-.attn[Tree-based methods]
+.attn[Decision trees]
 1. work for .hi[both classification and regression]
 
 --
@@ -223,7 +222,7 @@ $$
 ---
 ## Growing trees
 
-We .hi[choose the regions to minimize RSS] .it[across all] `\(J\)` [regions], _i.e._,
+We .hi[choose the regions to minimize RSS] .it[across all] `\(J\)` .note[regions], _i.e._,
 $$
 `\begin{align}
   \sum_{j=1}^{J} \left( y_i - \hat{y}_{R_j} \right)^2
@@ -232,7 +231,7 @@ $$
 
 --
 
-.b[Problem:] Examining every possible parition is computationally infeasible.
+.b[Problem:] Examining every possible partition is computationally infeasible.
 
 --
 
@@ -488,7 +487,7 @@ name: pruning
 🌲 Also called: .it[weakest-link pruning].
 ]
 
-Just as we did with lasso, .attn[cost-complexity pruning] forces the tree to pay a price (penalty) to become more complex
+Just as we did with lasso, .attn[cost-complexity pruning] forces the tree to pay a price (penalty) to become more complex.
 
 .it[Complexity] here is defined as the number of regions `\(|T|\)`.
 
