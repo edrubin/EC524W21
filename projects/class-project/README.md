@@ -93,6 +93,3 @@ Submit a short evaluation of whether you and your group-member equally distribut
 | 10 | Yuling Wu | Zhichao Shan | Pengfei Qin | Wine quality |
 | 11 | Jeffrey Yang | Eric Andersen |   | TBD |
 | 12 | Benn Jesser | Joey Schechter |   | EV performance |
-| 13 | TBA      | TBA       | TBD         |
-| 14 | TBA      | TBA       | TBD         |
-| 15 | TBA      | TBA       | TBD         |
