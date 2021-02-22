@@ -79,20 +79,20 @@ Submit a short evaluation of whether you and your group-member equally distribut
 
 ## Groups and topics
 
-| ID | Member 1 | Member 2  | Topic/Title |
-|----|----------|-----------|-------------|
-| 1  | TBA      | TBA       | TBD         |
-| 2  | TBA      | TBA       | TBD         |
-| 3  | TBA      | TBA       | TBD         |
-| 4  | TBA      | TBA       | TBD         |
-| 5  | TBA      | TBA       | TBD         |
-| 6  | TBA      | TBA       | TBD         |
-| 7  | TBA      | TBA       | TBD         |
-| 8  | TBA      | TBA       | TBD         |
-| 9  | TBA      | TBA       | TBD         |
-| 10 | TBA      | TBA       | TBD         |
-| 11 | TBA      | TBA       | TBD         |
-| 12 | TBA      | TBA       | TBD         |
+| ID | Member 1 | Member 2 | Member 3 | Topic/Title |
+|----|----------|-----------|-----------|-------------|
+| 1  | Owen Jetton |   |   | CO2 emissions from US power plants |
+| 2  | Derek Holste | Austin Turvey | Mason Carhart | Corporate bankruptcy |
+| 3  | Devin Bunch | Claire Field |   | TBD |
+| 4  | Andy Clyde | Asher Paules-Bronet |   | Predicting graduation from TN Star |
+| 5  | Jonas Bowman | Ian Bogley |   | Predicting NBA MVP |
+| 6  | Hunter Pearson | Amy Yang |   | Stock returns |
+| 7  | Matt McCoy |   |   | Malware detection |
+| 8  | Hongzhou Huang |   |   | PM2.5 in China |
+| 9  | Mingwei Xu |   |   | The price of used cars |
+| 10 | Yuling Wu | Zhichao Shan | Pengfei Qin | Wine quality |
+| 11 | Jeffrey Yang | Eric Andersen |   | TBD |
+| 12 | Benn Jesser | Joey Schechter |   | EV performance |
 | 13 | TBA      | TBA       | TBD         |
 | 14 | TBA      | TBA       | TBD         |
 | 15 | TBA      | TBA       | TBD         |
