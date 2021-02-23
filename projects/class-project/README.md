@@ -83,13 +83,13 @@ Submit a short evaluation of whether you and your group-member equally distribut
 |----|----------|-----------|-----------|-------------|
 | 1  | Owen Jetton |   |   | CO2 emissions from US power plants |
 | 2  | Derek Holste | Austin Turvey | Mason Carhart | Corporate bankruptcy |
-| 3  | Devin Bunch | Claire Field |   | TBD |
+| 3  | Devin Bunch | Claire Field |   | Life expectancy |
 | 4  | Andy Clyde | Asher Paules-Bronet |   | Predicting graduation from TN Star |
 | 5  | Jonas Bowman | Ian Bogley |   | Predicting NBA MVP |
 | 6  | Hunter Pearson | Amy Yang |   | Stock returns |
 | 7  | Matt McCoy |   |   | Malware detection |
 | 8  | Hongzhou Huang |   |   | PM2.5 in China |
 | 9  | Mingwei Xu |   |   | The price of used cars |
-| 10 | Yuling Wu | Zhichao Shan | Pengfei Qin | Wine quality |
-| 11 | Jeffrey Yang | Eric Andersen |   | TBD |
+| 10 | Yuling Wu | Zhichao (Scott) Shan | Pengfei Qin | Wine quality |
+| 11 | Jeffrey Yang | Eric Andersen |   | VIX levels |
 | 12 | Benn Jesser | Joey Schechter |   | EV performance |

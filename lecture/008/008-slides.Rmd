@@ -657,38 +657,6 @@ heart_df %<>%
   mutate(thal = if_else(is.na(thal), "normal", thal))
 ```
 
-```{r, tidy-bag, include = F, eval = F}
-# Read data
-heart_df = read_csv("Heart.csv") %>%
-  dplyr::select(-X1) %>%
-  rename(HeartDisease = AHD) %>%
-  clean_names()
-# Recipe to clean data (impute NAs)
-heart_recipe = recipe(heart_disease ~ ., data = heart_df) %>% 
-  step_medianimpute(all_predictors() & all_numeric()) %>% 
-  step_modeimpute(all_predictors() & all_nominal())
-# Define the bagged tree model
-heart_bag = bag_tree(
-  mode = "classification",
-  cost_complexity = 0,
-  tree_depth = NULL,
-  min_n = 2,
-  class_cost = NULL
-) %>% set_engine(
-  engine = "rpart",
-  times = 10
-)
-# Define CV splits
-heart_cv = heart_df %>% vfold_cv(v = 5)
-# Define workflow
-heart_bag_wf = workflow() %>% 
-  add_model(heart_bag) %>% 
-  add_recipe(heart_recipe)
-# Fit/assess with CV
-test = heart_bag_wf %>% fit_resamples(heart_cv)
-test = heart_bag_wf %>% fit(heart_df)
-```
-
 .col-left[
 <br>With OOB-based error
 ```{r, ex-bag-oob, cache = T, dependson = "load-data-heart"}
@@ -805,12 +773,12 @@ class: clear, middle
 
 We .it[can] ["trick"](https://www.sds.pub/bagged-trees.html) random forests (`ranger`) into doing OOB for bagged trees.
 
-But first, we need to learn about random forests.
+But first, we need to learn about random forests...
 
 ---
 class: clear, middle
 
-But before .it[that], let's talk about variable importance.
+... and before .it[that], let's briefly talk about variable importance.
 
 ---
 name: bag-var
@@ -825,46 +793,86 @@ While ensemble methods tend to .hi[improve predictive performance],
 We can illustrate .attn[variables' importance] by considering their splits' reductions in the model's performance metric (RSS, Gini, entropy, _etc._)..super[🌳]
 
 .footnote[
-🌳 This idea isn't exclusive to bagging/ensembles—we can (and do) apply it to a single tree.
+🌳 This idea isn't exclusive to bagging/ensembles; it also works for a single tree.
 ]
 
 --
 
+.note[Note] By default, many variable-importance functions will scale importance.
 
+---
+layout: false
+class: clear
 
-.note[Note] By default, `varImp()` will scale improtance between 0 and 100.
+In the case of `"rpart"` bagged trees...
+
+```{r, tidy-bag-0, eval = T, include = F, cache = T}
+# Read data
+heart_df = read_csv("Heart.csv") %>%
+  dplyr::select(-X1) %>%
+  rename(HeartDisease = AHD) %>%
+  clean_names()
+```
+
+```{r, tidy-bag-1, eval = T, cache = T, dependson = -1}
+# Recipe to clean data (impute NAs)
+heart_recipe = recipe(heart_disease ~ ., data = heart_df) %>% 
+  step_medianimpute(all_predictors() & all_numeric()) %>% 
+  step_modeimpute(all_predictors() & all_nominal())
+# Define the bagged tree model
+heart_bag = bag_tree(
+  mode = "classification",
+  cost_complexity = 0,
+  tree_depth = NULL,
+  min_n = 2,
+  class_cost = NULL
+) %>% set_engine(
+  engine = "rpart",
+  times = 100
+)
+# Define workflow
+heart_bag_wf = workflow() %>% 
+  add_model(heart_bag) %>% 
+  add_recipe(heart_recipe)
+# Fit/assess with CV
+heart_bag_fit = heart_bag_wf %>% fit(heart_df)
+```
+
+---
+class: clear
+
+... the fitted object automatically includes variable importance.
+
+```{r, tidy-bag-imp, echo = F}
+# Variable importance
+heart_bag_fit %>% pull_workflow_fit() %$% fit
+```
 
 ---
 class: clear
 
 ```{r, ex-var-importance, include = F, cache = T, dependson = "ex-bag-oob"}
 # Get importance
-bag_imp = varImp(heart_bag, scale = F)
-# Convert to data frame
-imp_df = tibble(
-  variable = row.names(bag_imp$importance),
-  importance = bag_imp$importance
-) %>% mutate(
-  variable = if_else(str_detect(variable, "thal"), "thal", variable),
-  variable = if_else(str_detect(variable, "chest_pain"), "chest_pain", variable)
-) %>% group_by(variable) %>%
-summarize(importance = sum(importance)) %>%
-mutate(importance = importance - min(importance)) %>%
-mutate(importance = 100 * importance / max(importance))
+imp_df = heart_bag_fit %>% pull_workflow_fit() %$% fit %>% var_imp()
+# Standardize importance
+imp_df %<>% mutate(
+  importance = value - min(value),
+  importance = 100 * importance / max(importance)
+)
 ```
 
 .hi-pink[Variable importance] from our bagged tree model.
 
-```{r, plot-var-importance, echo = F, dependson = "ex-var-importance"}
+```{r, plot-var-importance, echo = F, dependson = -3}
 # Plot importance
 ggplot(
   data = imp_df,
-  aes(x = reorder(variable, -importance), y = importance)
+  aes(x = reorder(term, -importance), y = importance)
 ) +
 geom_col(fill = red_pink) +
 geom_hline(yintercept = 0) +
 xlab("Variable") +
-ylab("Importance (scaled)") +
+ylab("Importance (scaled [0,100])") +
 # scale_fill_viridis_c(option = "magma", direction = -1) +
 theme_minimal(base_size = 20, base_family = "Fira Sans Book") +
 theme(legend.position = "none") +
@@ -928,7 +936,7 @@ Random forests thus introduce .b[two dimensions of random variation]
 
 1. the .b[bootstrapped sample]
 
-2. the $m$ .b[randomly selected predictors]
+2. the $m$ .b[randomly selected predictors] (for the split)
 
 Everything else about random forests works just as it did with bagging..super[🎄]
 
@@ -941,34 +949,35 @@ Everything else about random forests works just as it did with bagging..super[�
 name: rf-r
 ## Random forests in R
 
-You have .it[many] [options](http://topepo.github.io/caret/train-models-by-tag.html#Random_Forest) for training random forests in R.
-<br>_E.g._, `party`, `Rborist`, `ranger`, `randomForest`.
+You have several [options](http://topepo.github.io/caret/train-models-by-tag.html#Random_Forest) for training random forests with `tidymodels`..super[🎄]
+<br>_E.g._, `ranger`, `randomForest`, `spark`.
 
-`caret` offers access to each of these packages via `train`.
-
---
-
-- _E.g._, `method = "rf"` or `method = "ranger"`
-
---
-
-- The argument `mtry` gives the number of predictors at each split..super[🌲]
+`rand_forest()` accesses each of these packages via their .it[engines].
 
 .footnote[
-🌲 `predFixed` for `Rborist`.
+🎄 And even more if you look outside of `tidymodels`.
 ]
 
 --
 
-- Some methods have additional parameters, _e.g._, `ranger` needs
-  - minimal node size `min.node.size`
-  - a splitting rule `splitrule`.
+- The default engine is `"ranger"` ([`ranger`](https://cran.r-project.org/web/packages/ranger/index.html) package).
+
+--
+
+- The argument `mtry` gives $m$, the # of predictors at each split.
+
+--
+
+You've already seen the other hyperparameters for `ranger`:
+
+- `trees` the number of trees in your (random) forest
+- `min_n` min. # of observations
 
 ---
 layout: true
 # Ensemble methods
 
-Training a random forest in R using `caret`...
+Training a random forest in R using `tidymodels`...
 
 ---
 
@@ -977,23 +986,48 @@ Training a random forest in R using `caret`...
 ]
 
 .col-right[
-```{r, ex-ranger, cache = T}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini",
-    "min.node.size" = 1:10
-  )
+```{r, ex-tidy-ranger, cache = T}
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification",
+  mtry = 3,
+  trees = 100,
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini"
+)
+```
+]
+
+```{r, ex-tidy-ranger-fit, include = F, cache = T, dependson = -1}
+# Define workflow
+heart_rf_wf = workflow() %>% 
+  add_model(heart_rf) %>% 
+  add_recipe(heart_recipe)
+# Fit
+heart_rf_fit = heart_rf_wf %>% fit(heart_df)
+```
+
+---
+count: false
+
+.col-left[
+... and `ranger`
+- Goal: Classification
+]
+
+.col-right[
+```{r, eval = F}
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", #<<
+  mtry = 3,
+  trees = 100,
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini"
 )
 ```
 ]
@@ -1003,190 +1037,127 @@ count: false
 
 .col-left[
 ... and `ranger`
-- Specify `"ranger"` for method
+- Goal: Classification
+- Three variables per split
 ]
 
 .col-right[
 ```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger", #<<
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini",
-    "min.node.size" = 1:10
-  )
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", 
+  mtry = 3, #<<
+  trees = 100,
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini"
 )
 ```
 ]
+
 ---
 count: false
 
 .col-left[
 ... and `ranger`
-- Specify `"ranger"` for method
-- Number of trees: `num.trees`
+- Goal: Classification
+- Three variables per split
+- 100 trees in the forest
 ]
 
 .col-right[
 ```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100, #<<
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini",
-    "min.node.size" = 1:10
-  )
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", 
+  mtry = 3,
+  trees = 100, #<<
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini"
 )
 ```
 ]
+
 ---
 count: false
 
 .col-left[
 ... and `ranger`
-- Specify `"ranger"` for method
-- Number of trees: `num.trees`
-- We can still use OOB for error
+- Goal: Classification
+- Three variables per split
+- 100 trees in the forest
+- At least 2 obs. to split
 ]
 
 .col-right[
 ```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob" #<<
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini",
-    "min.node.size" = 1:10
-  )
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", 
+  mtry = 3,
+  trees = 100,
+  min_n = 2 #<<
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini"
 )
 ```
 ]
+
 ---
 count: false
 
 .col-left[
 ... and `ranger`
-- Specify `"ranger"` for method
-- Number of trees: `num.trees`
-- We can still use OOB for error
-- Parameters to choose/train
-  1. $m$, # of predictors at a split
+- Goal: Classification
+- Three variables per split
+- 100 trees in the forest
+- At least 2 obs. to split
+- Choose the `ranger` engine
 ]
 
 .col-right[
 ```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13, #<<
-    "splitrule" = "gini",
-    "min.node.size" = 1:10
-  )
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", 
+  mtry = 3,
+  trees = 100,
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger", #<<
+  splitrule = "gini"
 )
 ```
 ]
+
 ---
 count: false
 
 .col-left[
 ... and `ranger`
-- Specify `"ranger"` for method
-- Number of trees: `num.trees`
-- We can still use OOB for error
-- Parameters to choose/train
-  1. $m$, # of predictors at a split
-  1. the rule for splitting
+- Goal: Classification
+- Three variables per split
+- 100 trees in the forest
+- At least 2 obs. to split
+- Choose the `ranger` engine
+- Set a [splitting rule](https://dials.tidymodels.org/reference/ranger_parameters.html)
 ]
 
 .col-right[
 ```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini", #<<
-    "min.node.size" = 1:10
-  )
-)
-```
-]
----
-count: false
-
-.col-left[
-... and `ranger`
-- Specify `"ranger"` for method
-- Number of trees: `num.trees`
-- We can still use OOB for error
-- Parameters to choose/train
-  1. $m$, # of predictors at a split
-  1. the rule for splitting
-  1. minimum size for a leaf
-]
-
-.col-right[
-```{r, eval = F}
-# Set the seed
-set.seed(12345)
-# Train the random forest
-heart_forest = train(
-  heart_disease ~ .,
-  data = heart_df,
-  method = "ranger",
-  num.trees = 100,
-  trControl = trainControl(
-    method = "oob"
-  ),
-  tuneGrid = expand.grid(
-    "mtry" = 2:13,
-    "splitrule" = "gini",
-    "min.node.size" = 1:10 #<<
-  )
+# Define the random forest
+heart_rf = rand_forest(
+  mode = "classification", 
+  mtry = 3,
+  trees = 100,
+  min_n = 2
+) %>% set_engine(
+  engine = "ranger",
+  splitrule = "gini" #<<
 )
 ```
 ]
@@ -1390,21 +1361,24 @@ $\mathop{\color{#6A5ACD}{\hat{f}}}(x) = \sum_{b} \lambda \mathop{\color{#e64173}
 name: boost-r
 ## Boosting in R
 
-We will use `caret`'s `method = "gbm"` to train boosted trees..super[🌴]
+We will use `parsnips`'s `boost_tree()` to train boosted trees..super[🌴]
 
 .footnote[
-🌴 This method uses the `gbm` package.
+🌴 This method uses the `xgboost` package.
 ]
 
-`gbm` needs the three standard parameters of boosted trees—plus one more:
+`boost_tree()` takes several parameters you've seen—plus one more:
 
-1. `n.trees`, the number of trees $(B)$
+1. `mtry` number of predictors to try at each split
 
-1. `interaction.depth`, trees' depth (max. splits from top)
+1. `trees`, the number of trees $(B)$
 
-1. `shrinkage`, the learning rate $(\lambda)$
+1. `min_n`, minimum observations to split
 
-1. `n.minobsinnode`, minimum observations in a terminal node
+1. `tree_depth`, max. tree depth (max. splits from top)
+
+1. `learn_rate`, the learning rate $(\lambda)$
+
 ---
 exclude: true
 
@@ -1428,7 +1402,10 @@ heart_boost = train(
   )
 )
 ```
+
 ---
+exclude: true
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1453,8 +1430,11 @@ heart_boost = train(
 )
 ```
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1483,8 +1463,11 @@ heart_boost = train(
 <br>
 - boosted trees via `gbm` package
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1514,8 +1497,11 @@ heart_boost = train(
 - boosted trees via `gbm` package
 - cross validation now (no OOB)
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1547,8 +1533,11 @@ heart_boost = train(
 - CV-search of parameter grid
   - number of trees
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1581,8 +1570,11 @@ heart_boost = train(
   - number of trees
   - tree depth (complexity)
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1616,8 +1608,11 @@ heart_boost = train(
   - tree depth (complexity)
   - shrinkage (learing rate)
 ]
+
 ---
+exclude: true
 count: false
+
 ## Boosting in R
 
 .col-left.pad-top[
@@ -1652,6 +1647,7 @@ heart_boost = train(
   - shrinkage (learing rate)
   - minimum leaf size<br>(not searching here)
 ]
+
 ---
 layout: false
 class: clear
