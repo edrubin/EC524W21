@@ -200,6 +200,12 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 2.  Running a Ridge, Lasso or Elasticnet logistic regression in `tidymodels` using a fresh dataset.
 3.  Predicting the model onto test data and then viewing the confusion matrix.
 
+[**006 - Decision trees and bagging in R**](https://www.kaggle.com/stephenreed/ec-424-524-lab-7/)
+
+1. Creating and defining a decision tree model in R using the `decision_tree()` function.
+2. Creating and defining a bagging model in R using the `bag_tree()` function.
+3. Plotting a decision tree using `rpart.plot()`.
+
 ## Additional resources
 
 ### R
