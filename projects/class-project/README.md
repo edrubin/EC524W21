@@ -93,3 +93,7 @@ Submit a short evaluation of whether you and your group-member equally distribut
 | 10 | Yuling Wu | Zhichao (Scott) Shan | Pengfei Qin | Wine quality |
 | 11 | Jeffrey Yang | Eric Andersen |   | VIX levels |
 | 12 | Benn Jesser | Joey Schechter |   | EV performance |
+| 13 | Lisa Lindquist |   |   | Bike-share demand |
+| 14 | Kara Krnacik |   |   | Global education |
+| 15 | Tillman Degens |   |   | Box-office revenue |
+| 16 | Jonathan Ely |   |   | Timing for building permits |

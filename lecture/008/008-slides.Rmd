@@ -1166,21 +1166,81 @@ heart_rf = rand_forest(
 layout: false
 class: clear
 
+.note[Step 1:] Define our parameter grid
+
+```{r, rf-param, cache = T}
+# Define the parameter grid
+rf_grid = expand_grid(
+  mtry = 1:13,
+  min_n = 1:15
+)
+```
+
+---
+class: clear
+
+.note[Step 2:] Write a function that fits a RF using .b.orange[given hyperparameters].
+
+```{r, rf-fun, cache = T}
+# Function: One set of hyperparam
+rf_i = function(i) {
+  # Define the random forest
+  heart_rf_i = rand_forest(
+    mode = "classification", 
+    mtry = rf_grid$mtry[i], #<<
+    trees = 100,
+    min_n = rf_grid$min_n[i] #<<
+  ) %>% set_engine(engine = "ranger", splitrule = "gini")
+  # Define workflow
+  heart_rf_wf_i = 
+    workflow() %>% add_model(heart_rf_i) %>% add_recipe(heart_recipe)
+  # Fit
+  heart_rf_fit_i = heart_rf_wf_i %>% fit(heart_df)
+  # Return DF w/ OOB error and the hyperparameters
+  tibble(
+    mtry = rf_grid$mtry[i],
+    min_n = rf_grid$min_n[i],
+    # Note: OOB error is buried
+    error_oob = heart_rf_fit_i$fit$fit$fit$prediction.error
+  )
+}
+```
+
+---
+layout: false
+class: clear
+
+.note[Step 3:] Fit all of the forests (in `parallel`)!
+
+```{r, rf-param-oob, cache = T, dependson = c(-2, -1)}
+# Fit the RFs on the grid
+rf_tuning = mclapply(
+  X = 1:nrow(rf_grid),
+  FUN = rf_i,
+  mc.cores = 12
+) %>% rbindlist()
+```
+
+---
+layout: false
+class: clear
+
 .b[Accuracy] (OOB) across the grid of our parameters.
 
 ```{r, plot-rf-parameters, echo = F}
 ggplot(
-  data = heart_forest$results,
-  aes(x = mtry, y = min.node.size, fill = Accuracy)
+  data = rf_tuning,
+  aes(x = mtry, y = min_n, fill = 1-error_oob)
 ) +
 geom_tile(color = "white", size = 0.3) +
-xlab("Number of variables at split (m)") +
-ylab("Min. leaf size") +
+scale_x_continuous("Number of variables at split (m)", breaks = 1:13) +
+scale_y_continuous("Min. leaf size", breaks = c(1, 5, 10, 15)) +
 scale_fill_viridis_c("Accuracy", option = "magma", labels = percent) +
 theme_minimal(base_size = 20, base_family = "Fira Sans Book") +
 theme(
   legend.position = "bottom",
-  legend.key.width = unit(3, "cm")
+  legend.key.width = unit(3, "cm"),
+  panel.grid.minor = element_blank()
 )
 ```
 ---

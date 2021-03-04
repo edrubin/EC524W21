@@ -1036,6 +1036,68 @@ heart_rf = rand_forest(
 layout: false
 class: clear
 
+.note[Step 1:] Define our parameter grid
+
+
+```r
+# Define the parameter grid
+rf_grid = expand_grid(
+  mtry = 1:13,
+  min_n = 1:15
+)
+```
+
+---
+class: clear
+
+.note[Step 2:] Write a function that fits a RF using .b.orange[given hyperparameters].
+
+
+```r
+# Function: One set of hyperparam
+rf_i = function(i) {
+  # Define the random forest
+  heart_rf_i = rand_forest(
+    mode = "classification", 
+*   mtry = rf_grid$mtry[i],
+    trees = 100,
+*   min_n = rf_grid$min_n[i]
+  ) %&gt;% set_engine(engine = "ranger", splitrule = "gini")
+  # Define workflow
+  heart_rf_wf_i = 
+    workflow() %&gt;% add_model(heart_rf_i) %&gt;% add_recipe(heart_recipe)
+  # Fit
+  heart_rf_fit_i = heart_rf_wf_i %&gt;% fit(heart_df)
+  # Return DF w/ OOB error and the hyperparameters
+  tibble(
+    mtry = rf_grid$mtry[i],
+    min_n = rf_grid$min_n[i],
+    # Note: OOB error is buried
+    error_oob = heart_rf_fit_i$fit$fit$fit$prediction.error
+  )
+}
+```
+
+---
+layout: false
+class: clear
+
+.note[Step 3:] Fit all of the forests (in `parallel`)!
+
+
+```r
+# Fit the RFs on the grid
+rf_tuning = mclapply(
+  X = 1:nrow(rf_grid),
+  FUN = rf_i,
+  mc.cores = 12
+) %&gt;% rbindlist()
+```
+
+---
+layout: false
+class: clear
+
 .b[Accuracy] (OOB) across the grid of our parameters.
 
 &lt;img src="008-slides_files/figure-html/plot-rf-parameters-1.svg" style="display: block; margin: auto;" /&gt;
