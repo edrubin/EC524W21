@@ -24,6 +24,7 @@ class: center, middle, inverse, title-slide
 exclude: true
 
 
+
 ---
 name: admin
 # Admin
@@ -1113,6 +1114,191 @@ class: clear, middle
 .note[Note:] Costs have units. You often want to center/scale your variables.
 
 ---
+# Support vector machines
+## In R
+
+For a real example let's go back to the heart disease dataset.
+- Load the data.
+- Add a recipe .b[with normalization].
+- Define the CV splits.
+
+---
+# Support vector machines
+## In R
+
+For a real example let's go back to the heart disease dataset.
+
+
+```r
+# Load the dataset
+heart_df = read_csv("Heart.csv") %&gt;%
+  dplyr::rename(id = X1, HeartDisease = AHD) %&gt;%
+  janitor::clean_names()
+# Define the recipe w/ imputation, dummies, and normalization
+heart_recipe = recipe(heart_disease ~ ., data = heart_df) %&gt;% 
+  update_role(id, new_role = "id variable") %&gt;% 
+  step_medianimpute(all_predictors() &amp; all_numeric()) %&gt;% 
+  step_modeimpute(all_predictors() &amp; all_nominal()) %&gt;% 
+  step_dummy(all_predictors() &amp; all_nominal()) %&gt;% 
+  step_normalize(all_predictors())
+# Define CV
+set.seed(12345)
+heart_splits = heart_df %&gt;% vfold_cv(v = 5)
+```
+
+---
+layout: false
+class: clear, middle
+
+.note[Note] The actual linear SVM function `linear_svm()` is under development and isn't working quite right. First-degree polynomial *is* linear.
+
+---
+layout: false
+class: clear
+
+.b.pink[SVM with linear kernel]
+
+Define the .pink[model] and workflow—tuning `\(C\)`.
+
+.col-left[
+
+```r
+# The linear-SVM model
+heart_linear = svm_poly(
+  mode = "classification",
+  cost = tune(),
+  degree = 1
+) %&gt;% set_engine("kernlab")
+# The linear-SVM workflow
+wf_linear_svm = workflow() %&gt;% 
+  add_model(heart_linear) %&gt;% 
+  add_recipe(heart_recipe)
+```
+]
+
+.col-right[
+
+```r
+# Tune the linear SVM
+tuning_linear_svm = tune_grid(
+  wf_linear_svm,
+  heart_splits,
+  grid = data.frame(
+    cost = 10^seq(-4, 2, length = 10)
+  ),
+  metrics = metric_set(
+    f_meas, accuracy
+  )
+)
+```
+]
+
+---
+class: clear
+
+.b[Performance of .pink[linear-kernel SVMs]]
+
+&lt;img src="009-slides_files/figure-html/plot-svm-linear-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+layout: false
+class: clear
+
+.b.orange[SVM with polynomial kernel]
+
+Define the .orange[model] and workflow—tuning `\(C\)` *and* `degree`.
+
+.col-left[
+
+```r
+# The linear-SVM model
+heart_poly = svm_poly(
+  mode = "classification",
+  cost = tune(),
+  degree = tune()
+) %&gt;% set_engine("kernlab")
+# The linear-SVM workflow
+wf_poly_svm = workflow() %&gt;% 
+  add_model(heart_poly) %&gt;% 
+  add_recipe(heart_recipe)
+```
+]
+
+.col-right[
+
+```r
+# Tune the linear SVM
+tuning_poly_svm = tune_grid(
+  wf_poly_svm,
+  heart_splits,
+  grid = expand_grid(
+    cost = 10^seq(-4, 2, length = 10),
+    degree = 1:3
+  ),
+  metrics = metric_set(
+    f_meas, accuracy
+  )
+)
+```
+]
+
+---
+class: clear
+
+.b[*Accuracy* of .orange[polynomial-kernel SVMs]]
+
+&lt;img src="009-slides_files/figure-html/plot-rbf-poly-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+layout: false
+class: clear
+
+.b.purple[SVM with RBF kernel]
+
+Define the .orange[model] and workflow—tuning `\(C\)` *and* `degree`.
+
+.col-left[
+
+```r
+# The linear-SVM model
+heart_rbf = svm_rbf(
+  mode = "classification",
+  cost = tune(),
+  rbf_sigma = tune()
+) %&gt;% set_engine("kernlab")
+# The linear-SVM workflow
+wf_rbf_svm = workflow() %&gt;% 
+  add_model(heart_rbf) %&gt;% 
+  add_recipe(heart_recipe)
+```
+]
+
+.col-right[
+
+```r
+# Tune the linear SVM
+tuning_rbf_svm = tune_grid(
+  wf_rbf_svm,
+  heart_splits,
+  grid = expand_grid(
+    cost = 10^seq(-4, 2, length = 10),
+    rbf_sigma = 10^c(-3:0)
+  ),
+  metrics = metric_set(
+    f_meas, accuracy
+  )
+)
+```
+]
+
+---
+class: clear
+
+.b[*Accuracy* of .purple[RBF-kernel SVMs]]
+
+&lt;img src="009-slides_files/figure-html/plot-svm-rbf-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
 layout: false
 name: multiclass
 # Support vector machines
@@ -1154,7 +1340,21 @@ Visualizing decision boundaries
 
 [*A Practical Guide to Support Vector Classification*](https://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf)
 
-.note[Coming up:] [A nice neural-net video](https://www.youtube.com/watch?v=aircAruvnKk)
+.note[Next:]
+- Prep: [A nice neural-net video](https://www.youtube.com/watch?v=aircAruvnKk)
+- Fun: [A neural-net playground](https://playground.tensorflow.org)
+
+---
+name: svr
+layout: false
+# SV Regression
+## Extending SVM regression problems
+
+You can extend this SVM idea to regression settings.
+
+.note[Recall] OLS regression chooses `\(\beta\)`s to minimize SSE-based loss.
+
+SV regression chooses `\(\beta\)`s to minimize loss based upon residuals .it[larger than some defined magnitude] (think: the margin).
 
 ---
 name: sources
@@ -1193,6 +1393,7 @@ These notes draw upon
   - [Generalization](#svm-gen)
   - [In R](#svm-r)
 1. [Multi-class classification](#multiclass)
+1. [SV Regression](#svr)
 ]
 ]
     </textarea>
