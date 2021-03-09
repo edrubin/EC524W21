@@ -1,4 +1,4 @@
-# In-class project 001
+# In-class project 000
 
 Today you get to teach a machine how to read. 
 
