@@ -2089,7 +2089,7 @@ As you probably guessed, `parsnip` offers several SVM options..super[†]
 
 - .b.pink[Linear].super[††] <br> .pink[`svm_linear(cost)`] with `"LiblineaR"` engine
 
-- .b.orange[Polynomial] <br> .orange[`svm_linear(cost, degree, scale_factor)`] with `"kernlab"` engine
+- .b.orange[Polynomial] <br> .orange[`svm_poly(cost, degree, scale_factor)`] with `"kernlab"` engine
 
 - .b.purple[Radial] <br> .purple[`svm_rbf(cost, rbf_sigma, scale_factor)`] with `"kernlab"` engine
 
@@ -2197,8 +2197,8 @@ ggplot(
 geom_line(size = 0.5) +
 geom_point(size = 4.5) +
 scale_x_log10("Cost", labels = scales::comma) +
-scale_y_continuous("Accuracy") +
-theme_minimal(base_family = "Fira Sans Book") +
+scale_y_continuous("Performance") +
+theme_minimal(base_family = "Fira Sans Book", base_size = 18) +
 scale_color_manual(
   "Metric",
   values = c(slate, purple),
@@ -2261,7 +2261,7 @@ geom_line(size = 0.5) +
 geom_point(size = 4.5) +
 scale_x_log10("Cost", labels = scales::comma) +
 scale_y_continuous("Accuracy") +
-theme_minimal(base_family = "Fira Sans Book") +
+theme_minimal(base_family = "Fira Sans Book", base_size = 18) +
 scale_color_manual(
   "Degree",
   values = c(slate, orange, red_pink)
@@ -2323,7 +2323,7 @@ geom_line(size = 0.5) +
 geom_point(size = 4.5) +
 scale_x_log10("Cost", labels = scales::comma) +
 scale_y_continuous("Accuracy") +
-theme_minimal(base_family = "Fira Sans Book") +
+theme_minimal(base_family = "Fira Sans Book", base_size = 18) +
 scale_color_manual(
   "RBF Sigma",
   values = c(slate, orange, red_pink, purple)

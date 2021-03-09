@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/735950/2bac59769bcb49279e8fa959cb949a3e
+bundleId: https://api.rpubs.com/api/v1/document/735950/2bac59769bcb49279e8fa959cb949a3e
+url: http://rpubs.com/edrubin/735950
+when: 1615264535.41815

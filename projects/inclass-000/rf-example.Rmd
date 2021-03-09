@@ -1,0 +1,194 @@
+---
+title: "Predicting Digits"
+author: "Ed Rubin"
+date: "3/8/2021"
+output: html_document
+---
+
+## Setup 
+
+Let's get started by loading packages and [data for the Digit Recognizer Kaggle competition](https://www.kaggle.com/c/digit-recognizer).
+
+```{r, load}
+# Packages
+library(pacman)
+p_load(tidyverse, patchwork, data.table, tidymodels, parallel, magrittr, here)
+# Load the training dataset
+train_dt = here("data", "train.csv") %>% fread()
+# Load the testing dataset
+test_dt = here("data", "test.csv") %>% fread()
+```
+
+As [before](), we want to integrate Kaggle's split into the `tidymodels` framework (specifically `rsample`).
+
+- Join the data together.
+- Use `make_splits()` to create a *split* object.
+
+```{r, remake-split}
+# Join the datasets together
+all_dt = rbindlist(
+  list(train_dt, test_dt),
+  use.names = T, fill = T
+)
+# Find indices of training and testing datasets
+i_train = 1:nrow(train_dt)
+i_test = (nrow(train_dt)+1):nrow(all_dt)
+# Define the custom-split object
+kaggle_split = make_splits(
+  ind = list(analysis = i_train, assessment = i_test),
+  data= all_dt
+)
+# Impose the split (yes, this is redundant)
+train_dt = kaggle_split %>% training()
+```
+
+## Examples
+
+What do the data look like? Let's plot a few examples.
+
+```{r, ex-plot}
+# Create an example plot for each integer
+gg = lapply(X = c(2,1,17,8,4,9,22,7,11,12), FUN = function(i) {
+  ggplot(
+    data = expand_grid(
+      y = 28:1,
+      x = 1:28
+    ) %>% mutate(value = train_dt[i,-"label"] %>% unlist()),
+    aes(x = x, y = y, fill = value)
+  ) +
+  geom_raster() +
+  scale_fill_viridis_c("") +
+  theme_void() +
+  theme(legend.position = "bottom") +
+  coord_equal()
+})
+# Create a grid of examples
+(gg[[1]] + gg[[2]] + gg[[3]]) /
+  (gg[[4]] + gg[[5]] + gg[[6]]) /
+  (gg[[7]] + gg[[8]] + gg[[9]]) +
+  plot_layout(guides = "collect") &
+  theme(
+    legend.position = "bottom",
+    legend.key.width = unit(2, "cm")
+  )
+```
+
+## Cleaning and recipes
+
+The data are already quite clean (check for yourself), so our only real `recipe` step is to convert the outcome to factor. (Why?)
+
+```{r, recipe, cache = T}
+# Set up a recipe to create a factor of the label
+simple_recipe = 
+  recipe(label ~ ., data = train_dt) %>% 
+  step_mutate(label = as.factor(label))
+```
+
+Of course there's always something more you could try... here's an example of PCA (I'm not going to use it).
+
+```{r, recipe-pca, eval = F}
+# If you wanted to go with PCA...
+# NOTE: I'm not using this chunk
+simple_recipe_pca = 
+  recipe(label ~ ., data = train_dt) %>% 
+  step_mutate(label = as.factor(label)) %>% 
+  step_pca(all_predictors(), threshold = 0.99) %>% 
+  step_rm(starts_with("pixel"))
+```
+
+## Tuning
+
+As we saw [in lecture](https://raw.githack.com/edrubin/EC524W21/master/lecture/008/008-slides.html#79), we can tune using out-of-bag (OOB) error with random forests (and bagged trees).
+
+First I'll define the hyperparameter grid. I'm keeping things pretty simple.
+
+```{r, grid}
+# The tuning grid
+rf_grid = expand_grid(
+  min_n = c(10, 100),
+  mtry = c(15, 30, 45)
+)
+```
+
+Here's a function that takes `i` (the row number of our hyperparameter grid) and returns the OOB error.
+
+```{r, rf-function}
+# Our RF function
+rf_i = function(i) {
+  # The RF model for iteration i
+  model_rf_i = 
+    rand_forest(
+      trees = 100,
+      min_n = rf_grid$min_n[i],
+      mtry = rf_grid$mtry[i],
+    ) %>%
+    set_mode("classification") %>%
+    set_engine(
+      "ranger",
+      splitrule = "gini"
+    )
+  # The workflow for iteration i
+  wf_i = workflow() %>% add_model(model_rf_i) %>% add_recipe(simple_recipe)
+  # Fit it!
+  fit_i = wf_i %>% fit(train_dt)
+  # Return DF w/ OOB error and the hyperparameters
+  tibble(
+    mtry = rf_grid$mtry[i],
+    min_n = rf_grid$min_n[i],
+    # Note: OOB error is buried
+    error_oob = fit_i$fit$fit$fit$prediction.error
+  )  
+}
+```
+
+Now I'll run it in `parallel` (if you're on a Windows machine, you should use a different package, *e.g.*, `future_apply` and/or `furrr`).
+
+```{r, parallel-tune, cache = T, dependson = c("recipe")}
+# Run it in parallel
+rf_tuning = mclapply(
+  X = 1:nrow(rf_grid),
+  FUN = rf_i,
+  mc.cores = min(detectCores(), nrow(rf_grid))
+) %>% bind_rows()
+# Order the models by error
+setorder(rf_tuning, error_oob)
+rf_tuning
+```
+
+## Finalize
+
+Finally, we can finalize our workflow. I'm going to define a random forest model, and then I'll use `finalize_workflow()` along with the first row of our tuning dataset (from above) to create our final workflow.
+
+```{r, final-wf}
+# Define our best RF model
+rf_best = rand_forest(
+  trees = 100,
+  min_n = tune(),
+  mtry = tune()
+) %>% set_mode("classification") %>% 
+set_engine("ranger", splitrule = "gini")
+# Finalize the workflow with the results from our OOB table
+wf_rf_best = 
+  workflow() %>%
+  add_recipe(simple_recipe) %>% 
+  add_model(rf_best) %>% 
+  finalize_workflow(parameters = rf_tuning[1,])
+```
+
+Now we can fit the final workflow on the full training dataset and predict onto the testing dataset (saving the predictions to upload to Kaggle).
+
+```{r, last-fit, cache = T, dependson = c("recipe", "parallel-tune")}
+# The last fit!
+final_fit = last_fit(
+  wf_rf_best,
+  split = kaggle_split
+)
+# Save the predictions
+final_fit %>%
+  collect_predictions() %>%
+  transmute(
+    ImageId = 1:n(),
+    Label = .pred_class %>% as.character() %>% as.integer()
+  ) %>% 
+  write_csv("data/rf-pred.csv")
+```

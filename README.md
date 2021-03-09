@@ -146,11 +146,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 *Paper:* [Prediction Policy Problems](https://www.cs.cornell.edu/home/kleinber/aer15-prediction.pdf)
 
-**003**
-
-**004**
-
-**005**
+**003** *In class:* [MNIST image classification](https://github.com/edrubin/EC524W21/tree/master/projects/inclass-000) (with multiple classes!)
 
 ## Class project
 

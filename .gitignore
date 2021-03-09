@@ -3,7 +3,7 @@
 exam/*
 
 # Project-specific files
-
+*/inclass-000/data*
 
 # History files
 .Rhistory
