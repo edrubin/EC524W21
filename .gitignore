@@ -1,9 +1,12 @@
 
 # Temporary holds
-exam/*
+exam/data/solution-submission.csv
+exam/data/clean-data.R
 
 # Project-specific files
 */inclass-000/data*
+exam/data/yelp_academic_dataset_business.json
+exam/submissions
 
 # History files
 .Rhistory

@@ -54,7 +54,7 @@ Welcome to Economics 524 (424): Prediction and machine-learning in econometrics,
 
 1. Model accuracy
 1. Loss for regression and classification
-1. The variance bias-tradeoff
+1. The variance-bias tradeoff
 1. The Bayes classifier
 1. KNN
 

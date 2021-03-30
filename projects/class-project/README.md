@@ -87,7 +87,7 @@ Submit a short evaluation of whether you and your group-member equally distribut
 | 4  | Andy Clyde | Asher Paules-Bronet |   | Predicting graduation from TN Star |
 | 5  | Jonas Bowman | Ian Bogley |   | Predicting NBA MVP |
 | 6  | Hunter Pearson | Amy Yang |   | Stock returns |
-| 7  | Matt McCoy |   |   | Malware detection |
+| 7  | Matt McCoy | Jonathan Ely |   | Malware detection |
 | 8  | Hongzhou Huang |   |   | PM2.5 in China |
 | 9  | Mingwei Xu |   |   | The price of used cars |
 | 10 | Yuling Wu | Zhichao (Scott) Shan | Pengfei Qin | Wine quality |
@@ -96,4 +96,3 @@ Submit a short evaluation of whether you and your group-member equally distribut
 | 13 | Lisa Lindquist |   |   | Bike-share demand |
 | 14 | Kara Krnacik |   |   | Global education |
 | 15 | Tillman Degens |   |   | Box-office revenue |
-| 16 | Jonathan Ely |   |   | Timing for building permits |
